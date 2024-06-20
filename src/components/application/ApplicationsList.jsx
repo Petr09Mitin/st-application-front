@@ -33,7 +33,7 @@ function ApplicationsList(props) {
             </tr>
         </thead>
         <tbody>
-            {applications.map(application => <tr key={application.id}>
+            {applications && applications.map(application => <tr key={application.id}>
                 <td>{application.id}</td>
                 <td>{application.tgUserId}</td>
                 <td>{application.fullName}</td>
