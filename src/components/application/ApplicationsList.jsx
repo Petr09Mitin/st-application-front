@@ -3,7 +3,7 @@ import applicationAPI from "../../api/application"
 import Table from 'react-bootstrap/Table';
 import { formatStringDate } from "../../utils/date";
 
-function ApplicationsList(props) {
+function ApplicationsList() {
     const [applications, setApplications] = useState([])
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function ApplicationsList(props) {
             </tr>
         </thead>
         <tbody>
-            {applications && applications.map(application => <tr key={application.id}>
+            {Array.isArray(applications) && applications.map(application => <tr key={application.id}>
                 <td>{application.id}</td>
                 <td>{application.tgUserId}</td>
                 <td>{application.fullName}</td>
