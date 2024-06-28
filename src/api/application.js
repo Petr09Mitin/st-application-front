@@ -3,7 +3,7 @@ import { API_URL } from "../config/config"
 class ApplicationAPI {
     async GetAllApplications() {
         try {
-            const res = await fetch(`${API_URL}/application/`)
+            const res = await fetch(`${API_URL}/applications/`)
             if (res.ok) {
                 const jsonRes = await res.json()
                 return jsonRes.body
