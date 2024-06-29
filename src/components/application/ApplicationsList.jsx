@@ -1,20 +1,38 @@
 import { useEffect, useState } from "react"
 import applicationAPI from "../../api/application"
 import Table from 'react-bootstrap/Table';
-import { formatStringDate } from "../../utils/date";
+import ApplicationRow from "./ApplicationRow";
 
 function ApplicationsList() {
-    const [applications, setApplications] = useState([])
+    const [applications, setApplications] = useState([]);
 
     useEffect(() => {
         applicationAPI.GetAllApplications()
         .then((data) => {
-            setApplications(data)
+            setApplications(data);
         })
         .catch(() => {
-            setApplications([])
-        })
-    }, [])
+            setApplications([]);
+        });
+    }, []);
+
+    const approve = async (applicationId) => {
+        const application = await applicationAPI.ApproveApplication(applicationId)
+        if (!application) {
+            return
+        }
+
+        setApplications(prev => prev.filter(val => val.id !== application.id))
+    }
+
+    const reject = async (applicationId) => {
+        const application = await applicationAPI.RejectApplication(applicationId)
+        if (!application) {
+            return
+        }
+
+        setApplications(prev => prev.filter(val => val.id !== application.id))
+    }
 
     return (
         <>
@@ -23,26 +41,25 @@ function ApplicationsList() {
         <thead>
             <tr>
             <th>#</th>
-            <th>Telegram ID</th>
+            <th>Ссылка на аккаунт</th>
             <th>ФИО</th>
             <th>Телефон</th>
             <th>Район/город</th>
             <th>Мотивация</th>
             <th>Откуда узнал</th>
             <th>Дата и время подачи заявки</th>
+            <th colSpan="2">Вердикт</th>
             </tr>
         </thead>
         <tbody>
-            {Array.isArray(applications) && applications.map(application => <tr key={application.id}>
-                <td>{application.id}</td>
-                <td>{application.tgUserId}</td>
-                <td>{application.fullName}</td>
-                <td>{application.phoneNumber}</td>
-                <td>{application.district}</td>
-                <td>{application.purposeOfApplication}</td>
-                <td>{application.sourceOfInformation}</td>
-                <td>{formatStringDate(application.createdAt)}</td>
-            </tr>)}
+            {Array.isArray(applications) && applications.map(application => 
+                <ApplicationRow 
+                    key={application.id} 
+                    application={application} 
+                    approve={approve}
+                    reject={reject}
+                />
+            )}
         </tbody>
         </Table>
         </>
