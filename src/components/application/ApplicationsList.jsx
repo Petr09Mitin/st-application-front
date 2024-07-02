@@ -43,10 +43,8 @@ function ApplicationsList() {
             <th>#</th>
             <th>Ссылка на аккаунт</th>
             <th>ФИО</th>
-            <th>Телефон</th>
             <th>Район/город</th>
             <th>Мотивация</th>
-            <th>Откуда узнал</th>
             <th>Дата и время подачи заявки</th>
             <th colSpan="2">Вердикт</th>
             </tr>

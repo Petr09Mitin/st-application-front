@@ -18,10 +18,8 @@ function ApplicationRow({application, approve, reject}) {
                 <td>{application.id}</td>
                 <td><a href={`https://t.me/${application.tgUsername}`}>{application.tgUsername}</a></td>
                 <td>{application.fullName}</td>
-                <td>{application.phoneNumber}</td>
                 <td>{application.district}</td>
                 <td>{application.purposeOfApplication}</td>
-                <td>{application.sourceOfInformation}</td>
                 <td>{formatStringDate(application.createdAt)}</td>
                 <td>
                     <Button variant="outline-success" onClick={handleApprove}>Одобрить</Button>
