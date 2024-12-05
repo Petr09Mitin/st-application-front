@@ -19,7 +19,7 @@ function ApplicationRow({application, approve, reject}) {
                 <td><a href={`https://t.me/${application.tgUsername}`}>{application.tgUsername}</a></td>
                 <td>{application.fullName}</td>
                 <td>{application.district}</td>
-                <td>{application.purposeOfApplication}</td>
+                <td>{application.isSevChelParticipant ? "Да" : "Нет"}</td>
                 <td>{formatStringDate(application.createdAt)}</td>
                 <td>
                     <Button variant="outline-success" onClick={handleApprove}>Одобрить</Button>
